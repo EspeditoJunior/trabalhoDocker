@@ -1,0 +1,248 @@
+swagger: "2.0"
+info:
+  description: Swagger file that goes with our server code
+  version: "1.0.0"
+  title: Swagger ReST Clientes
+consumes:
+  - application/json
+produces:
+  - application/json
+
+basePath: /api
+
+paths:
+  /clientes:
+    get:
+      operationId: clientes.read_all
+      tags:
+        - Clientes
+      summary: Lista de clientes
+      description: Read Lista de Clientes
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Numero de Clientes para obter de Clientes
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering Clientes
+          required: false
+      responses:
+        200:
+          description: Successfully read Clientes list operation
+          schema:
+            type: array
+            items:
+              properties:
+                NomeDoCliente:
+                  type: string
+                RG:
+                  type: string
+                Telefone:
+                  type: string
+    
+    post:
+      operationId: clientes.create
+      tags:
+        - Clientes
+      summary: Create a person and add it to the Clientes list
+      description: Create a new person in the Clientes list
+      parameters:
+        - name: cliente
+          in: body
+          description: Person to create
+          required: True
+          schema:
+            type: object
+            properties:
+              NomeDoCliente:
+                type: string
+                description: Nome do cliente
+              RG:
+                type: string
+                description: RG do cliente
+              Telefone:
+                type: string
+                description: Telefone do cliente
+      responses:
+        201:
+          description: Successfully created person in list
+
+  /clientes/{RG}:
+    get:
+      operationId: clientes.read_one
+      tags:
+        - Clientes
+      summary: Read one person from the Clientes list
+      description: Read one person from the Clientes list
+      parameters:
+        - name: RG
+          in: path
+          description: RG do cliente para obter da lista
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read person from Clientes list operation
+          schema:
+            properties:
+              RG:
+                type: string
+    
+    put:
+      operationId: clientes.update
+      tags:
+        - Clientes
+      summary: Update a person in the Clientes list
+      description: Update a person in the Clientes list
+      parameters:
+        - name: RG
+          in: path
+          description: RG do cliente para atualizar
+          type: string
+          required: True
+        - name: cliente
+          in: body
+          schema:
+            type: object
+            properties:
+              NomeDoCliente:
+                type: string
+              RG:
+                type: string
+              Telefone:
+                type: string
+      responses:
+        200:
+          description: Successfully updated person in Clientes list
+    
+    delete:
+      operationId: clientes.delete
+      tags:
+        - Clientes
+      summary: Delete a person from the Clientes list
+      description: Delete a person
+      parameters:
+        - name: RG
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a person from Clientes list
+  /categorias:
+    get:
+      operationId: categorias.read_all
+      tags:
+        - Categorias
+      summary: Lista de categorias
+      description: Read Lista de Categorias
+      parameters:
+        - name: length
+          in: query
+          type: integer
+          description: Numero de Categorias para obter de Categorias
+          required: false
+        - name: offset
+          in: query
+          type: integer
+          description: Offset from beginning of list where to start gathering Categorias
+          required: false
+      responses:
+        200:
+          description: Successfully read Categorias list operation
+          schema:
+            type: array
+            items:
+              properties:
+                NomeDaCategoria:
+                  type: string
+                ID:
+                  type: string
+    
+    post:
+      operationId: categorias.create
+      tags:
+        - Categorias
+      summary: Create a person and add it to the Categorias list
+      description: Create a new person in the Categorias list
+      parameters:
+        - name: categoria
+          in: body
+          description: Person to create
+          required: True
+          schema:
+            type: object
+            properties:
+              NomeDaCategoria:
+                type: string
+                description: Nome da categoria
+              ID:
+                type: string
+                description: ID da categoria
+      responses:
+        201:
+          description: Successfully created person in list
+
+  /categorias/{ID}:
+    get:
+      operationId: categorias.read_one
+      tags:
+        - Categorias
+      summary: Read one person from the Categorias list
+      description: Read one person from the Categorias list
+      parameters:
+        - name: ID
+          in: path
+          description: ID do categorias para obter da lista
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully read person from Categorias list operation
+          schema:
+            properties:
+              ID:
+                type: string
+    
+    put:
+      operationId: categorias.update
+      tags:
+        - Categorias
+      summary: Update a person in the Categorias list
+      description: Update a person in the Categorias list
+      parameters:
+        - name: ID
+          in: path
+          description: ID do categoria para atualizar
+          type: string
+          required: True
+        - name: categoria
+          in: body
+          schema:
+            type: object
+            properties:
+              NomeDaCategoria:
+                type: string
+              ID:
+                type: string
+      responses:
+        200:
+          description: Successfully updated person in Categorias list
+    
+    delete:
+      operationId: categorias.delete
+      tags:
+        - Categorias
+      summary: Delete a person from the Categorias list
+      description: Delete a person
+      parameters:
+        - name: ID
+          in: path
+          type: string
+          required: True
+      responses:
+        200:
+          description: Successfully deleted a person from Categorias list
